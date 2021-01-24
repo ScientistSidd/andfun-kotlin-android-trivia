@@ -12,30 +12,27 @@ import com.example.android.navigation.databinding.FragmentTitleBinding
 
 class TitleFragment : Fragment() {
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val binding: FragmentTitleBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_title, container,false
+                inflater, R.layout.fragment_title, container, false
         )
-        binding.playButton.setOnClickListener{
-            Navigation.findNavController(it).navigate(R.id.action_titleFragment_to_gameFragment)
-        setHasOptionsMenu(true)
-}
-return binding.root
-    }
+        binding.playButton.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment))
+            setHasOptionsMenu(true)
+            return binding.root
+        }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.overflowmenu, menu)
-
+        inflater.inflate(R.menu.overflowmenu, menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!,
-        view!!.findNavController())
-                || return super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
+                || super.onOptionsItemSelected(item)
+    }
     }
 
-}
