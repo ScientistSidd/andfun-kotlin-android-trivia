@@ -19,20 +19,22 @@ class TitleFragment : Fragment() {
                 inflater, R.layout.fragment_title, container, false
         )
         binding.playButton.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment))
-            setHasOptionsMenu(true)
-            return binding.root
-        }
-
+                Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment))
+        setHasOptionsMenu(true)
+        return binding.root
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.overflowmenu, menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
-                || super.onOptionsItemSelected(item)
+        when (item.itemId) {
+            R.id.fragment_about -> return super.onOptionsItemSelected(item)
+        }
+        return super.onOptionsItemSelected(item)
     }
-    }
+}
 
